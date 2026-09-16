@@ -51,7 +51,7 @@ const PROFILE = {
   education: {
     institution: "BRAC University",
     location: "Dhaka, Bangladesh",
-    degree: "B.Sc. in CSE",
+    degree: "BSc in CSE",
     thesis: {
       title: "Real-time dynamic facial recognition of subject in motion using angular images",
       description: "Researched and implemented computer vision algorithms to track and identify moving targets across various multi-angle lighting and rotational conditions."
@@ -72,7 +72,7 @@ const PROFILE = {
     ]
   },
   stats: [
-    { label: "Degree", value: "B.Sc. in CSE" },
+    { label: "Degree", value: "BSc in CSE" },
     { label: "Career Focus", value: "SQA / SDET" },
     { label: "QA Training", value: "70+ Hours" },
     { label: "Hands-On Projects", value: "6 QA Works" }
