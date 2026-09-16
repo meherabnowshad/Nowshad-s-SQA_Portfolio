@@ -394,7 +394,7 @@ export default function App() {
     showToast("Opening Gmail to send hiring inquiry...");
   };
 
-  const CV_DRIVE_URL = "https://drive.google.com/drive/u/0/folders/1O4ChDbwoo6skmMHmUqsdcbwJr-zzMsAW";
+  const CV_DRIVE_URL = "https://drive.google.com/file/d/1XeSZdgaGNL90c2h5mC2UV_YlDgVBUz1y/view?usp=sharing";
 
   const handleDownloadCV = () => {
     window.open(CV_DRIVE_URL, '_blank', 'noopener,noreferrer');
