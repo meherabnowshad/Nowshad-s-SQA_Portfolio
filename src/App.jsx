@@ -346,7 +346,6 @@ export default function App() {
   const [uiSimStep, setUiSimStep] = useState(0);
   const [dbQueryTab, setDbQueryTab] = useState('users');
 
-  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
   const timerRef = useRef(null);
 
   const showToast = (msg) => {
@@ -386,22 +385,13 @@ export default function App() {
     showToast(`Opening Gmail compose for ${PROFILE.email}...`);
   };
 
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    if (!contactForm.name || !contactForm.email || !contactForm.message) {
-      showToast("Please fill in all contact fields.");
-      return;
-    }
-
-    const subject = encodeURIComponent("Message from Portfolio");
-    const bodyText = `Name: ${contactForm.name}\nWork Email: ${contactForm.email}\n\nOpportunity Details:\n${contactForm.message}`;
-    const body = encodeURIComponent(bodyText);
-
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}&su=${subject}&body=${body}`;
+  const handleSendEmail = () => {
+    const subject = "Hiring Inquiry";
+    const bodyText = "Hi, Meherab. I would like to discuss an opportunity with you.";
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PROFILE.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
     window.open(gmailUrl, '_blank', 'noopener,noreferrer');
 
-    showToast("Opening email client with pre-filled message!");
-    setContactForm({ name: '', email: '', message: '' });
+    showToast("Opening Gmail to send hiring inquiry...");
   };
 
   const CV_DRIVE_URL = "https://drive.google.com/drive/u/0/folders/1O4ChDbwoo6skmMHmUqsdcbwJr-zzMsAW";
@@ -1378,53 +1368,25 @@ export default function App() {
             </div>
 
             <div className="lg:col-span-7">
-              <form onSubmit={handleContactSubmit} className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                <h3 className="text-lg font-bold text-white font-mono mb-2">Send Message</h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1">Your Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      placeholder="John Doe"
-                      className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 text-xs focus:outline-none focus:border-cyan-500 font-mono"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-mono text-slate-400 mb-1">Your Email</label>
-                    <input
-                      type="email"
-                      required
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      placeholder="john@example.com"
-                      className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 text-xs focus:outline-none focus:border-cyan-500 font-mono"
-                    />
-                  </div>
+              <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 sm:p-10 space-y-5 flex flex-col items-center justify-center text-center h-full min-h-[320px]">
+                <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center">
+                  <Send className="w-6 h-6 text-cyan-400" />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">Opportunity Details / Message</label>
-                  <textarea
-                    rows={4}
-                    required
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    placeholder="Hello Meherab, we would like to discuss an SQA / SDET role..."
-                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 text-xs focus:outline-none focus:border-cyan-500 font-mono resize-none"
-                  />
+                <div className="space-y-2">
+                  <h3 className="text-lg font-bold text-white font-mono">Prefer Email?</h3>
+                  <p className="text-xs font-mono text-slate-400 max-w-sm leading-relaxed">
+                    Click below to open Gmail with a pre-filled hiring inquiry to {PROFILE.email}.
+                  </p>
                 </div>
 
                 <button
-                  type="submit"
-                  className="w-full py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs font-mono flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-cyan-500/10"
+                  onClick={handleSendEmail}
+                  className="px-8 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm font-mono flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-cyan-500/10"
                 >
-                  <Send className="w-4 h-4" /> Send Direct Message
+                  <Send className="w-4 h-4" /> Send Email
                 </button>
-              </form>
+              </div>
             </div>
 
           </div>
